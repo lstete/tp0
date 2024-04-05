@@ -12,23 +12,51 @@ int main(void)
 	t_log* logger;
 	t_config* config;
 
+	// Coloco los const char* de esta forma para respetar tipos y por si en algún momento hago un archivo de strings para recolectar estos parámetros
+
+	char* log_file = "tp0.log";
+	char* log_program_name = "TP0_logger";
+	char* config_file = "/home/utnso/Desktop/SO/tp0/client/cliente.config";
+
+	// CONFIG KEYS
+	
+	char* ip_key = "IP";
+	char* puerto_key = "PUERTO";
+	char* valor_key = "CLAVE";
+
 	/* ---------------- LOGGING ---------------- */
-
+	
 	logger = iniciar_logger();
-
+	logger = log_create(log_file,log_program_name, true , LOG_LEVEL_INFO);
 	// Usando el logger creado previamente
 	// Escribi: "Hola! Soy un log"
+
+	log_info(logger,"Probando log");
 
 
 	/* ---------------- ARCHIVOS DE CONFIGURACION ---------------- */
 
 	config = iniciar_config();
+	config = config_create(config_file);
+
 
 	// Usando el config creado previamente, leemos los valores del config y los 
 	// dejamos en las variables 'ip', 'puerto' y 'valor'
 
+	// Pequeño chequeo, podría hacer los respectivos log pero de momento puede aguardar :P
+	if(!config_has_property(config,ip_key)) exit(EXIT_FAILURE);
+	if(!config_has_property(config,puerto_key)) exit(EXIT_FAILURE);
+	if(!config_has_property(config,valor_key)) exit(EXIT_FAILURE);
+	
+	ip = config_get_string_value(config,ip_key);
+	puerto = config_get_string_value(config,puerto_key);
+	valor = config_get_string_value(config,valor_key);
+
 	// Loggeamos el valor de config
 
+	log_info(logger,"IP: %s",ip);
+	log_info(logger,"PUERTO: %s",puerto);
+	log_info(logger,"CLAVE: %s",valor);
 
 	/* ---------------- LEER DE CONSOLA ---------------- */
 
@@ -97,4 +125,7 @@ void terminar_programa(int conexion, t_log* logger, t_config* config)
 {
 	/* Y por ultimo, hay que liberar lo que utilizamos (conexion, log y config) 
 	  con las funciones de las commons y del TP mencionadas en el enunciado */
+
+	log_destroy(logger);
+	config_destroy(config);
 }
