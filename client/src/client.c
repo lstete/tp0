@@ -96,15 +96,18 @@ t_config* iniciar_config(void)
 
 void leer_consola(t_log* logger)
 {
+	// Quité la primera lectura ya que preferí que entre directamente en el bucle
 	char* leido;
 
-	// La primera te la dejo de yapa
-	leido = readline("> ");
+	while (1) {
+        leido = readline("> ");
 
-	// El resto, las vamos leyendo y logueando hasta recibir un string vacío
+        if(!strlen(leido)) break;
 
+		log_info(logger,"%s",leido);
 
-	// ¡No te olvides de liberar las lineas antes de regresar!
+        free(leido);
+    }
 
 }
 
