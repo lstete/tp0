@@ -131,8 +131,6 @@ void consola_a_paquete(t_paquete* paquete)
 
 void paquete(int conexion)
 {
-	// Ahora toca lo divertido!
-	char* leido;
 	t_paquete* paquete;
 	paquete=crear_paquete();
 
