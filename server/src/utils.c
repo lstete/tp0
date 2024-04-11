@@ -33,6 +33,7 @@ int iniciar_servidor(void)
 	listen(socket_servidor, SOMAXCONN);
 
 	freeaddrinfo(servinfo);
+	printf("ña");
 	log_trace(logger, "Listo para escuchar a mi cliente");
 
 	return socket_servidor;
@@ -44,9 +45,13 @@ int esperar_cliente(int socket_servidor)
 	//assert(!"no implementado!");
 
 	// Aceptamos un nuevo cliente
-
+	
+	printf("ña2");
+	
 	int socket_cliente;
+
 	socket_cliente=accept(socket_servidor,NULL,NULL);
+	printf("Se conecto un cliente!");
 	log_info(logger, "Se conecto un cliente!");
 
 	return socket_cliente;
