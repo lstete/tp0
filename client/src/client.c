@@ -16,7 +16,7 @@ int main(void)
 
 	char* log_file = "tp0.log";
 	char* log_program_name = "TP0_logger";
-	char* config_file = "/home/utnso/Desktop/SO/tp0/client/cliente.config";
+	char* config_file = "cliente.config";
 
 	// CONFIG KEYS
 	
